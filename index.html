@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TechBitsMix — Privacy-first software for home crypto miners</title>
+<meta name="description" content="TechBitsMix builds BlockSeeker, AxeSentry, Miner Watcher and PoolMonitor: privacy-first, server-free apps for home and solo crypto miners. Information for users, investors and acquirers.">
+<link rel="canonical" href="https://shiftingeden.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TechBitsMix — Privacy-first software for home crypto miners">
+<meta property="og:description" content="TechBitsMix builds BlockSeeker, AxeSentry, Miner Watcher and PoolMonitor: privacy-first, server-free apps for home and solo crypto miners. Information for users, investors and acquirers.">
+<meta property="og:url" content="https://shiftingeden.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#F7931A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10;--bg2:#10141b;--card:#141922;--card2:#1a2029;--line:#252d3a;--text:#e9edf3;--muted:#9aa5b5;--faint:#6b7686;
+  --acc:#F7931A;--acc2:#A78BFA;--accsoft:color-mix(in srgb,var(--acc) 14%,transparent);--ok:#34d399;--warn:#fbbf24;--bad:#f87171;
+  --radius:18px;--shadow:0 20px 60px -20px rgba(0,0,0,.6);
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f7f8fb;--bg2:#eef1f6;--card:#ffffff;--card2:#f3f5f9;--line:#dde3ec;--text:#0f172a;--muted:#4b5567;--faint:#7a8597;--shadow:0 20px 50px -24px rgba(15,23,42,.25);
+}}
+:root[data-theme="light"]{--bg:#f7f8fb;--bg2:#eef1f6;--card:#ffffff;--card2:#f3f5f9;--line:#dde3ec;--text:#0f172a;--muted:#4b5567;--faint:#7a8597;--shadow:0 20px 50px -24px rgba(15,23,42,.25)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.ic{flex:none}
+/* nav */
+nav.top{position:sticky;top:0;z-index:20;backdrop-filter:saturate(1.4) blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:20px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;letter-spacing:-.01em}
+.logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;color:#0a0c10;font-weight:800;font-size:15px}
+.navlinks{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--muted)}
+.navlinks a{text-decoration:none}.navlinks a:hover{color:var(--text)}
+.navcta{font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;background:var(--text);color:var(--bg);text-decoration:none;white-space:nowrap}
+@media(max-width:860px){.navlinks{display:none}.navcta{margin-left:auto}}
+/* hero */
+.hero{position:relative;padding:84px 0 70px;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-30% -10% auto;height:680px;background:radial-gradient(600px 340px at 70% 30%,color-mix(in srgb,var(--acc) 26%,transparent),transparent 70%),radial-gradient(500px 300px at 15% 10%,color-mix(in srgb,var(--acc2) 18%,transparent),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+@media(max-width:920px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:56px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--acc);background:var(--accsoft);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);padding:6px 12px;border-radius:999px}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.04;letter-spacing:-.035em;margin:18px 0 18px;font-weight:800}
+h1 .grad{background:linear-gradient(120deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:40em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:14px;font-weight:600;text-decoration:none;font-size:15px;border:1px solid var(--line);transition:transform .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px);border-color:var(--acc)}
+.btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn small{display:block;font-size:11px;font-weight:500;opacity:.75;line-height:1.1}
+.btn .two{line-height:1.15}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+.chip .ic{color:var(--ok)}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:-10px}
+.stat{background:var(--card);padding:22px 20px}
+.stat b{display:block;font-size:24px;letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted)}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+/* sections */
+section{padding:84px 0}
+.sec-h{max-width:720px;margin-bottom:40px}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+h2{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.03em;margin:10px 0 12px}
+.sec-h p{color:var(--muted);font-size:17px}
+.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;position:relative}
+.step:before{counter-increment:s;content:counter(s);position:absolute;top:22px;right:22px;font-size:44px;font-weight:800;color:var(--line);line-height:1}
+.step .ic{color:var(--acc);margin-bottom:14px}
+.step h3{font-size:18px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:15px}
+/* features */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:960px){.feats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.feats{grid-template-columns:1fr}}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s}
+.feat:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line));transform:translateY(-2px)}
+.feat .ib{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--accsoft);color:var(--acc);margin-bottom:16px}
+.feat h3{font-size:17px;margin-bottom:6px;letter-spacing:-.01em}
+.feat p{color:var(--muted);font-size:14.5px}
+.feat ul{margin-top:10px;padding-left:0;list-style:none}
+.feat li{font-size:14px;color:var(--muted);padding-left:18px;position:relative;margin:3px 0}
+.feat li:before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+/* support matrix */
+.matrix{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.mcard h3{font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.mcard h3 .tag{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+.mcard ul{list-style:none}
+.mcard li{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;padding:5px 0;border-top:1px dashed var(--line);color:var(--muted)}
+.mcard li:first-child{border-top:0}
+.mcard li .ic{color:var(--ok);margin-top:3px}
+.note{font-size:13px;color:var(--faint);margin-top:18px}
+/* security */
+.sec-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;align-items:start}
+@media(max-width:900px){.sec-grid{grid-template-columns:1fr}}
+.flow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.flow svg{width:100%;height:auto;display:block}
+.flow .cap{font-size:13px;color:var(--muted);margin-top:12px}
+.sec-list{display:grid;gap:12px}
+.sl{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.sl .ic{color:var(--ok);margin-top:2px}
+.sl b{display:block;font-size:15px;margin-bottom:2px}
+.sl span{font-size:14px;color:var(--muted)}
+.label{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+@media(max-width:620px){.label{grid-template-columns:1fr}}
+.label div{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;background:var(--card2)}
+.label b{display:block;font-size:20px;color:var(--ok)}
+.label span{font-size:12.5px;color:var(--muted)}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:980px){.road{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.road{grid-template-columns:1fr}}
+.col{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.col h3{font-size:14px;display:flex;align-items:center;gap:8px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em}
+.dot{width:9px;height:9px;border-radius:50%}
+.col ul{list-style:none;display:grid;gap:8px}
+.col li{font-size:14px;color:var(--muted);background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.col li b{color:var(--text);font-weight:600;display:block;font-size:14px}
+/* investor band */
+.band{border:1px solid color-mix(in srgb,var(--acc) 35%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 12%,var(--card)),var(--card));border-radius:24px;padding:40px;display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center}
+@media(max-width:860px){.band{grid-template-columns:1fr;padding:28px}}
+.band h2{margin-top:6px}
+.band p{color:var(--muted)}
+.band ul{list-style:none;display:grid;gap:10px}
+.band li{display:flex;gap:10px;font-size:15px}
+.band li .ic{color:var(--acc);margin-top:3px}
+/* faq */
+.faq{display:grid;gap:10px;max-width:860px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--acc);font-size:20px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--muted);margin-top:10px;font-size:15px}
+/* family */
+.fam{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.fam{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.fam{grid-template-columns:1fr}}
+.fcard{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;transition:border-color .2s}
+.fcard:hover{border-color:var(--fc)}
+.fcard .fl{width:34px;height:34px;border-radius:9px;background:var(--fc);display:grid;place-items:center;color:#0a0c10;font-weight:800;margin-bottom:10px}
+.fcard b{display:block}
+.fcard span{font-size:13px;color:var(--muted)}
+.fcard.here{outline:2px solid var(--fc);outline-offset:-2px}
+footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--faint);font-size:13px}
+footer .wrap{display:grid;gap:12px}
+footer a{color:var(--muted)}
+.frow{display:flex;flex-wrap:wrap;gap:18px}
+/* device mockups */
+.device{justify-self:center;position:relative}
+.phone{width:290px;border-radius:44px;padding:12px;background:linear-gradient(160deg,#2a3140,#11151c);box-shadow:var(--shadow),inset 0 0 0 1px #3a4252}
+.screen{border-radius:34px;background:#0b0e13;overflow:hidden;color:#e9edf3;font-size:12px;min-height:540px;position:relative}
+.island{width:96px;height:28px;background:#000;border-radius:20px;margin:10px auto 6px}
+.scr-h{padding:6px 16px 10px}
+.scr-h small{color:#8a94a5;font-size:11px}
+.scr-h b{display:block;font-size:22px;letter-spacing:-.02em}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 10px}
+.tile{background:#151a22;border:1px solid #232a36;border-radius:14px;padding:10px}
+.tile small{color:#8a94a5;font-size:10px;display:block}
+.tile b{font-size:16px}
+.tile b i{font-style:normal;font-size:10px;color:#8a94a5;margin-left:2px}
+.rows{padding:0 12px;display:grid;gap:6px}
+.row{display:grid;grid-template-columns:8px 1fr auto;gap:10px;align-items:center;background:#151a22;border:1px solid #232a36;border-radius:12px;padding:9px 11px}
+.row .s{width:8px;height:8px;border-radius:50%}
+.row b{font-size:12px;display:block}
+.row small{color:#8a94a5;font-size:10px}
+.row .v{text-align:right;font-weight:600;font-size:12px}
+.row .v small{display:block;font-weight:400}
+.spark{margin:0 12px 10px;background:#151a22;border:1px solid #232a36;border-radius:14px;padding:10px}
+.spark svg{width:100%;height:56px;display:block}
+.tabbar{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;padding:10px 0 16px;background:#0f131a;border-top:1px solid #1d232d;color:#6b7686;font-size:9px}
+.tabbar span{display:flex;flex-direction:column;align-items:center;gap:2px}
+.tabbar .on{color:var(--acc)}
+.mac{width:min(520px,92vw);border-radius:14px;background:#0b0e13;box-shadow:var(--shadow),0 0 0 1px #2a3140;overflow:hidden;color:#e9edf3;font-size:12px}
+.mac .bar{height:30px;background:#151a22;display:flex;align-items:center;gap:7px;padding:0 12px;border-bottom:1px solid #232a36}
+.mac .bar i{width:11px;height:11px;border-radius:50%;display:block}
+.mac .body{display:grid;grid-template-columns:130px 1fr;min-height:330px}
+.mac .side{background:#10141b;border-right:1px solid #232a36;padding:12px 8px;display:grid;align-content:start;gap:3px;color:#8a94a5}
+.mac .side div{padding:6px 9px;border-radius:7px}
+.mac .side .on{background:#1d2430;color:#e9edf3}
+.mac .main{padding:14px}
+.mac table{width:100%;border-collapse:collapse;margin-top:10px}
+.mac th{font-weight:500;color:#8a94a5;text-align:left;font-size:10.5px;padding:6px 6px;border-bottom:1px solid #232a36}
+.mac td{padding:7px 6px;border-bottom:1px solid #1a2029;font-size:11.5px}
+.mac td .s{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
+@media(max-width:520px){.mac .body{grid-template-columns:1fr}.mac .side{display:none}.phone{width:270px}}
+.illus{font-size:11px;color:var(--faint);text-align:center;margin-top:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+.prod{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:820px){.prod{grid-template-columns:1fr}}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;position:relative;overflow:hidden}
+.pc:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--fc)}
+.pc .top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.pc .fl{width:44px;height:44px;border-radius:12px;background:var(--fc);display:grid;place-items:center;color:#0a0c10;font-weight:800;font-size:20px}
+.pc h3{font-size:22px;letter-spacing:-.02em}
+.pc .meta{font-size:13px;color:var(--muted)}
+.pc p{color:var(--muted);margin:8px 0 14px}
+.pc ul{list-style:none;display:grid;gap:6px;margin-bottom:18px}
+.pc li{font-size:14px;display:flex;gap:8px}
+.pc li .ic{color:var(--fc);margin-top:3px}
+.pc .links{display:flex;gap:10px;flex-wrap:wrap}
+.pc .btn{padding:9px 14px;font-size:14px}
+.cmp{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14px}
+.cmp th,.cmp td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.cmp thead th{background:var(--card2);font-size:13px;color:var(--muted);font-weight:600}
+.cmp td:first-child{color:var(--muted)}
+.cmp .y{color:var(--ok);font-weight:600}
+.tbl{overflow-x:auto;border-radius:16px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.pillars{grid-template-columns:1fr}}
+.arch{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.arch svg{width:100%;height:auto;display:block}
+</style>
+
+</head>
+<body>
+
+<nav class="top"><div class="wrap">
+<a class="brand" href="#top"><span class="logo">T</span>TechBitsMix</a>
+<div class="navlinks"><a href="#products">Products</a><a href="#compare">Compare</a><a href="#tech">Technology</a><a href="#trust">Trust</a><a href="#business">Business</a><a href="#roadmap">Roadmap</a></div>
+<a class="navcta" href="#contact">Investor contact</a></div></nav>
+<header class="hero" id="top"><div class="wrap" style="grid-template-columns:1fr">
+<div style="max-width:860px">
+<span class="eyebrow"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>Privacy-first mining software · Quebec, Canada</span>
+<h1>The software layer for <span class="grad">home &amp; solo miners.</span></h1>
+<p class="lead">TechBitsMix builds a family of four Apple-platform apps that let people monitor, protect and get the most out of the miners and pools they run, without accounts, servers or tracking.</p>
+<div class="ctas"><a class="btn primary" href="#products">Explore the apps</a><a class="btn" href="#contact"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>Talk about investment or acquisition</a></div>
+</div></div></header>
+<div class="wrap"><div class="stats">
+<div class="stat"><b>4 apps</b><span>iPhone, iPad and Mac</span></div>
+<div class="stat"><b>10+ device families</b><span>across 3 mining algorithms</span></div>
+<div class="stat"><b>6 pools</b><span>integrated in PoolMonitor 2.0</span></div>
+<div class="stat"><b>$0 / month</b><span>server costs: no backend at all</span></div>
+</div></div>
+<section id="products"><div class="wrap">
+<div class="sec-h"><div class="kicker">Products</div><h2>One toolkit, four entry points</h2><p>Each app targets a different kind of miner or device, and all four share the same engineering and the same privacy promise.</p></div>
+<div class="prod"><div class="pc" style="--fc:#F7931A"><div class="top"><span class="fl">B</span><div><h3>BlockSeeker</h3><div class="meta">iPhone &amp; iPad · $1.99 · Live (v1.1)</div></div></div>
+<p>The flagship: monitor and control every kind of home miner, from open-source solo miners to rack ASICs.</p><ul><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>SHA-256, Scrypt and Equihash</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Alerts, auto-recovery, remote control</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Solo block odds for 4 coin families</span></li></ul><div class="links"><a class="btn" href="https://shiftingeden.github.io/blockseeker/">Product page →</a><a class="btn primary" href="https://apps.apple.com/app/id6785354015"><svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>App Store</a></div></div><div class="pc" style="--fc:#2DD4BF"><div class="top"><span class="fl">A</span><div><h3>AxeSentry</h3><div class="meta">iPhone &amp; iPad · $0.99 · Live</div></div></div>
+<p>A focused, low-cost monitor for the fast-growing Bitaxe / NerdAxe open-source solo-mining community.</p><ul><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>AxeOS-native, set up in seconds</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>One-tap swarm pool switching</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Entry point to the toolkit</span></li></ul><div class="links"><a class="btn" href="https://shiftingeden.github.io/axesentry-site/">Product page →</a><a class="btn primary" href="https://apps.apple.com/us/app/axesentry/id6781810919"><svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>App Store</a></div></div><div class="pc" style="--fc:#60A5FA"><div class="top"><span class="fl">M</span><div><h3>Miner Watcher</h3><div class="meta">Mac · $1.99 · Live (v1.2, 1.3 coming)</div></div></div>
+<p>The always-on desktop control room. New device support and features ship here first, then port to iPhone.</p><ul><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Menu-bar status &amp; background monitoring</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Bulk pool/wallet changes, auto-reboots</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Beta per-group pool rotation in 1.3</span></li></ul><div class="links"><a class="btn" href="https://shiftingeden.github.io/MinerWatcher/">Product page →</a><a class="btn primary" href="https://apps.apple.com/us/app/miner-watcher/id6793359555"><svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>App Store</a></div></div><div class="pc" style="--fc:#A78BFA"><div class="top"><span class="fl">P</span><div><h3>PoolMonitor</h3><div class="meta">iPhone · $0.99 · Live (v2.0 rolling out)</div></div></div>
+<p>A read-only, pool-neutral dashboard for the pools solo and home miners actually use.</p><ul><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>6 pools: CKPool, OCEAN, public-pool, Parasite, Mining-Dutch, 2Miners</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Keys in Keychain, can&#x27;t move funds</span></li><li><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Braiins Pool &amp; Solo next; Mac version planned</span></li></ul><div class="links"><a class="btn" href="https://shiftingeden.github.io/PoolMonitor/">Product page →</a><a class="btn primary" href="https://apps.apple.com/app/id6785621114"><svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>App Store</a></div></div></div></div></section>
+<section id="compare" class="alt"><div class="wrap">
+<div class="sec-h"><div class="kicker">Compare</div><h2>Which app is for whom</h2></div>
+<div class="tbl"><table class="cmp"><thead><tr><th></th><th>BlockSeeker</th><th>AxeSentry</th><th>Miner Watcher</th><th>PoolMonitor</th></tr></thead><tbody><tr><td>Platform</td><td>iPhone, iPad</td><td>iPhone, iPad</td><td>Mac</td><td>iPhone</td></tr><tr><td>What it monitors</td><td>Miners (all types)</td><td>Miners (AxeOS)</td><td>Miners (all types)</td><td>Pools &amp; payouts</td></tr><tr><td>Algorithms</td><td>SHA-256, Scrypt, Equihash</td><td>SHA-256</td><td>SHA-256, Scrypt, Equihash</td><td>Per pool</td></tr><tr><td>Alerts</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td></tr><tr><td>Auto-recovery / reboots</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td>n/a</td></tr><tr><td>Pool switching &amp; tuning</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td>Read-only</td></tr><tr><td>Solo block odds</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td>Closest-to-block</td></tr><tr><td>Glanceable status</td><td>Widget, Live Activity</td><td>Widget, Live Activity</td><td>Menu-bar indicator</td><td>Widget</td></tr><tr><td>Account required</td><td>No</td><td>No</td><td>No</td><td>No</td></tr><tr><td>Developer servers</td><td>None</td><td>None</td><td>None</td><td>None</td></tr></tbody></table></div>
+</div></section>
+<section id="tech"><div class="wrap">
+<div class="sec-h"><div class="kicker">Technology</div><h2>Write once, ship to every app</h2><p>The miner apps share one device-integration approach: each protocol is implemented once, then ported across the family. Every change is tracked in a shared changelog with a per-app port-status matrix, so all three stay in sync.</p></div>
+<div class="arch"><svg viewBox="0 0 900 300" role="img" aria-label="Architecture: device and pool integrations feed shared features, delivered through four apps">
+<g style="font:600 13px Inter,system-ui">
+<rect x="20" y="20" width="160" height="56" rx="12" style="fill:var(--card2);stroke:var(--line)"/><text x="100" y="44" text-anchor="middle" style="fill:var(--text)">AxeOS</text><text x="100" y="62" text-anchor="middle" style="fill:var(--muted);font-weight:400;font-size:11px">Bitaxe · NerdAxe · NMAxe</text><rect x="200" y="20" width="160" height="56" rx="12" style="fill:var(--card2);stroke:var(--line)"/><text x="280" y="44" text-anchor="middle" style="fill:var(--text)">CGMiner API</text><text x="280" y="62" text-anchor="middle" style="fill:var(--muted);font-weight:400;font-size:11px">Avalon · Goldshell</text><rect x="380" y="20" width="160" height="56" rx="12" style="fill:var(--card2);stroke:var(--line)"/><text x="460" y="44" text-anchor="middle" style="fill:var(--text)">Antminer</text><text x="460" y="62" text-anchor="middle" style="fill:var(--muted);font-weight:400;font-size:11px">stock · Vnish · Braiins · Lux</text><rect x="560" y="20" width="160" height="56" rx="12" style="fill:var(--card2);stroke:var(--line)"/><text x="640" y="44" text-anchor="middle" style="fill:var(--text)">Pool APIs</text><text x="640" y="62" text-anchor="middle" style="fill:var(--muted);font-weight:400;font-size:11px">6 pools, read-only</text><rect x="740" y="20" width="160" height="56" rx="12" style="fill:var(--card2);stroke:var(--line)"/><text x="820" y="44" text-anchor="middle" style="fill:var(--text)">Network data</text><text x="820" y="62" text-anchor="middle" style="fill:var(--muted);font-weight:400;font-size:11px">difficulty for odds</text>
+<rect x="20" y="118" width="860" height="64" rx="14" style="fill:color-mix(in srgb,var(--acc) 12%,var(--card));stroke:var(--acc)"/>
+<text x="450" y="146" text-anchor="middle" style="fill:var(--text);font-size:15px">Shared features: monitoring · alerts · auto-recovery · pool control · tuning · block odds</text>
+<text x="450" y="166" text-anchor="middle" style="fill:var(--muted);font-weight:400;font-size:12px">Swift / SwiftUI · fully on-device · iCloud (user's own) for sync · Keychain for secrets</text>
+<rect x="20" y="224" width="200" height="56" rx="12" style="fill:var(--card2);stroke:#F7931A"/><text x="120" y="257" text-anchor="middle" style="fill:var(--text)">BlockSeeker</text><rect x="240" y="224" width="200" height="56" rx="12" style="fill:var(--card2);stroke:#2DD4BF"/><text x="340" y="257" text-anchor="middle" style="fill:var(--text)">AxeSentry</text><rect x="460" y="224" width="200" height="56" rx="12" style="fill:var(--card2);stroke:#60A5FA"/><text x="560" y="257" text-anchor="middle" style="fill:var(--text)">Miner Watcher</text><rect x="680" y="224" width="200" height="56" rx="12" style="fill:var(--card2);stroke:#A78BFA"/><text x="780" y="257" text-anchor="middle" style="fill:var(--text)">PoolMonitor</text>
+</g>
+<g style="stroke:var(--line);stroke-width:1.5"><line x1="100" y1="76" x2="100" y2="118"/><line x1="280" y1="76" x2="280" y2="118"/><line x1="460" y1="76" x2="460" y2="118"/><line x1="640" y1="76" x2="640" y2="118"/><line x1="820" y1="76" x2="820" y2="118"/><line x1="120" y1="182" x2="120" y2="224"/><line x1="340" y1="182" x2="340" y2="224"/><line x1="560" y1="182" x2="560" y2="224"/><line x1="780" y1="182" x2="780" y2="224"/></g>
+</svg></div></div></section>
+<section id="trust" class="alt"><div class="wrap">
+<div class="sec-h"><div class="kicker">Safety · Security · Privacy</div><h2>Trust is the product</h2><p>Miners are rightly wary of software that touches their hardware or their earnings. The whole family is built so there's nothing to trust us with.</p></div>
+<div class="pillars"><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><h3>No backend, by design</h3><p>There are no TechBitsMix servers. Apps talk directly to miners on the local network, or directly to a pool&#x27;s own API over HTTPS.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div><h3>Data Not Collected</h3><p>Every app carries Apple&#x27;s “Data Not Collected” privacy label: no analytics, ads or third-party SDKs.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Secrets stay on-device</h3><p>Pool API keys live in the iOS Keychain; optional Face ID lock. Sync uses the user&#x27;s own private iCloud.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><h3>Read-only where money is involved</h3><p>PoolMonitor cannot move funds: no wallet, withdrawals or payout changes, and it only uses read-only keys.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg></div><h3>Safe automation</h3><p>Auto-recovery is opt-in, attempt-capped, and only uses each device&#x27;s official settings API.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>No accounts</h3><p>Nothing to sign up for, nothing to leak. For an acquirer, there&#x27;s no user database to secure or migrate.</p></div></div>
+</div></section>
+<section id="business"><div class="wrap">
+<div class="sec-h"><div class="kicker">For investors &amp; acquirers</div><h2>A capital-light, high-margin software portfolio</h2><p>TechBitsMix is a founder-led studio with no burn rate. Capital or a strategic home, such as a hardware maker, pool operator or mining-software company, would turn a profitable niche toolkit into the default app layer for home miners.</p></div>
+<div class="pillars"><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Paid up front, no subscriptions</h3><p>Simple one-time pricing that miners like. Every sale is pure margin after Apple&#x27;s commission: no hosting, no per-user cost.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><h3>Growing niche, little competition</h3><p>Home and solo mining is growing with open-source hardware and compact home ASICs. Most tools are vendor-locked web dashboards or need cloud accounts.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3>Leverage across products</h3><p>One integration serves three miner apps; each new pool opens a new community for PoolMonitor.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div><h3>Clean, transferable asset</h3><p>Sole proprietor owns 100% of the code and IP. No servers, contracts or user data to unwind, so App Store transfer is straightforward.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h3>Documented &amp; maintained</h3><p>Native Swift codebases with shared changelogs, port-status tracking and fast App Store release cycles.</p></div><div class="feat"><div class="ib"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div><h3>Clear expansion paths</h3><p>PoolMonitor for Mac, more pools (Braiins next), more device families, and optional one-time Pro unlocks.</p></div></div>
+<div class="band" style="margin-top:28px"><div><h2 style="font-size:26px">Natural strategic fits</h2><p>Hardware makers and resellers wanting a first-class companion app; mining pools wanting a trusted mobile front-end; and wallet or mining-software companies adding a home-miner audience.</p></div>
+<ul><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Acquisition of one app or the whole family</span></li><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Investment to accelerate integrations and Mac/iPad parity</span></li><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>White-label or licensing of the integration engine</span></li><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Sales and performance data available on request</span></li></ul></div>
+</div></section>
+<section id="roadmap" class="alt"><div class="wrap">
+<div class="sec-h"><div class="kicker">Roadmap</div><h2>Portfolio roadmap</h2></div><div class="road"><div class="col"><h3><span class="dot" style="background:var(--ok)"></span>Shipped</h3><ul><li><b>BlockSeeker 1.1</b>Health timeline, Home ASIC group, scheduled reboots</li><li><b>AxeSentry 1.0</b>Swarm monitor for AxeOS</li><li><b>Miner Watcher 1.2</b>Bulk pool changes, auto-reboots</li><li><b>PoolMonitor 1.x</b>3 solo pools, wallet view, per-worker stats</li></ul></div><div class="col"><h3><span class="dot" style="background:var(--acc)"></span>In progress</h3><ul><li><b>PoolMonitor 2.0</b>OCEAN, Parasite, 2Miners, self-hosted public-pool</li><li><b>Miner Watcher 1.3</b>Goldshell &amp; NMAxe, Fallback switching, pool rotation (Beta)</li><li><b>Pool-switching fix</b>AxeOS 2.15+ in BlockSeeker &amp; AxeSentry</li></ul></div><div class="col"><h3><span class="dot" style="background:var(--warn)"></span>Planned</h3><ul><li><b>Braiins Pool &amp; Braiins Solo</b>PoolMonitor</li><li><b>PoolMonitor for Mac</b>Next major release</li><li><b>Feature parity</b>Mac → iPhone ports</li></ul></div><div class="col"><h3><span class="dot" style="background:var(--faint)"></span>Exploring</h3><ul><li><b>Kryptex &amp; other large pools</b>PoolMonitor</li><li><b>New device families</b>Driven by user requests</li></ul></div></div>
+<p class="note">Plans, not promises. Timing depends on App Store review and hardware makers' firmware changes.</p></div></section>
+<section id="contact"><div class="wrap"><div class="band">
+<div><div class="kicker">Contact</div><h2>Let's talk</h2><p>For investment, acquisition, partnership or licensing inquiries, email the founder directly. I'm happy to share product demos, metrics and code walkthroughs under NDA.</p>
+<div class="ctas"><a class="btn primary" href="mailto:TechBitsMix@gmail.com?subject=TechBitsMix%20%E2%80%94%20Investment%20%2F%20Acquisition%20inquiry"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>TechBitsMix@gmail.com</a></div></div>
+<ul><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Founder-led, independent iOS &amp; macOS developer</span></li><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg><span>Sole proprietorship based in Quebec, Canada</span></li><li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>Wider catalogue of Apple-platform apps on the App Store</span></li></ul>
+</div></div></section>
+<footer><div class="wrap"><div class="frow"><a href="https://shiftingeden.github.io/blockseeker/">BlockSeeker</a><a href="https://shiftingeden.github.io/axesentry-site/">AxeSentry</a><a href="https://shiftingeden.github.io/MinerWatcher/">Miner Watcher</a><a href="https://shiftingeden.github.io/PoolMonitor/">PoolMonitor</a><a href="mailto:TechBitsMix@gmail.com">Contact</a></div>
+<div>© 2026 TechBitsMix. All product names, logos and brands of third-party hardware, firmware and pools are property of their respective owners and used for identification only. TechBitsMix apps are independent and not affiliated with or endorsed by them.</div>
+<div>Mining results vary. Block odds are statistical estimates. Nothing on this site is financial advice.</div></div></footer></body></html>
